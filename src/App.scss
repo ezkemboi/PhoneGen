@@ -1,0 +1,28 @@
+.App {
+  background-color: #ecf0f1;
+  margin: 2% 30%;
+  border: 1px solid gray;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  button {
+    background-color: gray;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+  }
+  button:hover {
+    cursor: pointer;
+    color: blue;
+  }
+}
+
+.Download-pdf-file {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+
+
