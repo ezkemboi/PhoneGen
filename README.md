@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/ezrqnkemboi/random_phone_number_generator.svg?branch=master)](https://travis-ci.org/ezrqnkemboi/random_phone_number_generator)
 [![Coverage Status](https://coveralls.io/repos/github/ezrqnkemboi/random_phone_number_generator/badge.svg?branch=master)](https://coveralls.io/github/ezrqnkemboi/random_phone_number_generator?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4671824149c7407dfe76/maintainability)](https://codeclimate.com/github/ezrqnkemboi/random_phone_number_generator/maintainability)
 
 # Phone Generator Number
 

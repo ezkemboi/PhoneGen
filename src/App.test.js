@@ -3,11 +3,10 @@ import { shallow } from 'enzyme';
 import App from './App';
 
 describe('APP', () => {
-  it('expect 1+1 to equal 2', () => {
-    expect(1 + 1).toEqual(2)
-  });
-
   it('renders without crashing', () => {
-    shallow(<App />);
+    const component = shallow(<App />)
+    component.find('button#generate-numbers').simulate('click');
+    expect(component).toMatchSnapshot();
+    expect(component.length).toEqual(1)
   })
 })
