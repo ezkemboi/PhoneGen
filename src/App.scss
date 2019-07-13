@@ -1,28 +1,97 @@
 .App {
-  background-color: #ecf0f1;
-  margin: 2% 30%;
-  border: 1px solid gray;
-  min-height: 600px;
   display: flex;
-  flex-direction: column;
+  margin: 2% 10%;
+  min-height: 85vh;
+  max-height: 90vh;
   text-align: center;
+  &__left {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-right: 30px;
+    background-color: white;
+    border: 1px solid gray;
+    h3 {
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 10px;
+      width: 50%;
+      align-self: center;
+    }
+    #app-description {
+      margin: 20px;
+      padding: 0 10px;
+    }
+    input {
+      height: 30px;
+      margin: 10px 20px;
+      width: 40%;
+      align-self: center;
+      text-align: center;
+    }
+    button {
+      display: flex;
+      align-self: center;
+      width: 70%;
+      justify-content: center;
+    }
+  }
+  &__right {
+    display: flex;
+    background-color: white;
+    width: 70%;
+    flex-direction: column;
+    border: 1px solid gray;
+    .download-pdf-file {
+      display: flex;
+      justify-content: flex-end;
+      margin: 10px;
+    }
+    .headers-for-phones {
+      display: flex;
+      border-bottom: 1px solid gray;
+      border-top: 1px solid gray;
+      &__index {
+        width: 30%;
+      }
+      &__number {
+        width: 70%;
+      }
+    }
+    .phone-list-table {
+      display: flex;
+      padding: 0 20px;
+      overflow-y: scroll;
+      &__left {
+        width: 30%;
+        p {
+          border-bottom: 1px solid gray;
+          padding-bottom: 2px;
+        }
+      }
+      &__right {
+        width: 70%;
+        p {
+          border-bottom: 1px solid gray;
+          padding-bottom: 2px;
+        }
+      }
+    }
+  }
   button {
-    background-color: gray;
+    background-color: white;
     height: 40px;
-    color: white;
+    color: black;
     font-size: 16px;
   }
   button:hover {
     cursor: pointer;
-    color: blue;
+    background: black;
+    color: white;
   }
 }
 
-.Download-pdf-file {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
+#app-title {
+  text-align: center;
+  font-size: 30px;
+  line-height: 20px;
 }
-
-
-
