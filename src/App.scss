@@ -46,6 +46,18 @@
     width: 70%;
     flex-direction: column;
     border: 1px solid gray;
+    .clear-button {
+      margin-right: 10px;
+      border: 2px solid black;
+      border-radius: 8px;
+    }
+    .clear-button:hover {
+      background-color: red;
+    }
+    #download-button {
+      border: 2px solid black;
+      border-radius: 8px;
+    }
     .download-pdf-file {
       display: flex;
       justify-content: flex-end;

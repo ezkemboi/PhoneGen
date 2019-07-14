@@ -56,6 +56,12 @@ class App extends React.Component {
     });
   }
 
+  // Clear/delete contacts from storage
+  clearContacts = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
+
   render() {
     const { amount, numbersGenerated } = this.state;
     let phoneNumbers;
@@ -108,7 +114,8 @@ class App extends React.Component {
           <div className="App__right">
             <div className="download-pdf-file">
               {/* <button onClick={this.generatePdf}>Download As Pdf</button> */}
-              <button>Download As Pdf</button>
+              <button className="clear-button" onClick={this.clearContacts}>Clear Contacts</button>
+              <button id="download-button">Download As Pdf</button>
             </div>
             <div className="headers-for-phones">
               <div className="headers-for-phones__index">
