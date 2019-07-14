@@ -13,7 +13,7 @@
     border: 1px solid gray;
     h3 {
       border-bottom: 1px solid currentColor;
-      padding-bottom: 10px;
+      padding-bottom: 20px;
       width: 50%;
       align-self: center;
     }
@@ -33,6 +33,11 @@
       align-self: center;
       width: 70%;
       justify-content: center;
+    }
+    button:disabled:hover {
+      background-color: white;
+      color: black;
+      opacity: 0.3;
     }
   }
   &__right {
@@ -57,22 +62,24 @@
         width: 70%;
       }
     }
-    .phone-list-table {
-      display: flex;
-      padding: 0 20px;
+    .contacts-table-list {
       overflow-y: scroll;
-      &__left {
-        width: 30%;
-        p {
-          border-bottom: 1px solid gray;
-          padding-bottom: 2px;
+      .phone-list-table {
+        display: flex;
+        padding: 0 20px;
+        &__left {
+          width: 30%;
+          p {
+            border-bottom: 1px solid gray;
+            padding-bottom: 2px;
+          }
         }
-      }
-      &__right {
-        width: 70%;
-        p {
-          border-bottom: 1px solid gray;
-          padding-bottom: 2px;
+        &__right {
+          width: 70%;
+          p {
+            border-bottom: 1px solid gray;
+            padding-bottom: 2px;
+          }
         }
       }
     }

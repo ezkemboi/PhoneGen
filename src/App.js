@@ -6,21 +6,35 @@ class App extends React.Component {
     super(props)
     this.state = {
       numbersGenerated: [],
-      generatedPhoneNumber: '',
       amount: 0
     }
   }
 
   componentDidMount() {
     // Fetch stored phone numbers from local storage
-
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    if (contacts && contacts.length >= 1) {
+      this.setState({
+        numbersGenerated: contacts
+      });
+    }
   }
 
-  // handleChange = (e) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     amount: amount
-  //   })
+  handleChange = (value) => {
+    this.setState({
+      amount: value
+    })
+  }
+
+  // generatePdf = () => {
+  //   console.log('I am clicked')
+  //   const docItems = document.getElementsByName('contacts-table-list')
+  //   window.onbeforeprint = (event) => {
+  //     console.log('------>>>>>', event)
+  //     document.write(docItems);
+  //     document.close();
+  //   }
+  //   window.print()
   // }
 
   // Generate new phone number function
@@ -28,21 +42,44 @@ class App extends React.Component {
     // Generate 9 random numbers
     let number;
     const { numbersGenerated, amount } = this.state;
-    for (let i = 0; i <= amount; i++) {
+    for (let i = 0; i < amount; i++) {
       number = `0${Math.floor(Math.random() * 1000000000)}`;
-      // Check already created numbers
-      if (!numbersGenerated.includes(number)) {
+      // Check already created numbers and its length (MAX = 10,000)
+      if (!numbersGenerated.includes(number) && numbersGenerated.length <= 10000) {
         numbersGenerated.push(number);
-        // Set the current generated numbers(Add 0 at the beginning)
-        this.setState({
-          generatedPhoneNumber: number
-        });
       }
     }
+    // Add generated numbers to state and save local storage
+    localStorage.setItem("contacts", JSON.stringify(numbersGenerated));
+    this.setState({
+      numbersGenerated
+    });
   }
 
   render() {
-    const { generatedPhoneNumber, amount } = this.state;
+    const { amount, numbersGenerated } = this.state;
+    let phoneNumbers;
+    let disabledButton;
+    // Edge cases for catching when to disable button
+    const itemsInLocalStorage = localStorage.getItem("contacts");
+    if (amount < 1 || amount >= 10000 || (itemsInLocalStorage && itemsInLocalStorage.length >= 10000)) {
+      disabledButton = "disabled"
+    }
+    if (numbersGenerated && numbersGenerated.length >= 1) {
+      phoneNumbers = numbersGenerated.map((number, index) => {
+        return (
+          <div className="phone-list-table" key={index}>
+            <div className="phone-list-table__left">
+              <p>{index + 1}</p>
+            </div>
+            <div className="phone-list-table__right">
+              <p>{number}</p>
+            </div>
+          </div>
+        )
+      });
+    }
+
     return (
       <div>
         <h3 id="app-title">PhoneGen - Phone Generator App</h3>
@@ -51,18 +88,25 @@ class App extends React.Component {
             <h3>PhoneGen</h3>
             <p id="app-description">
               Welcome to new phone number generator app.
-              Generate and store your phone numbers for retrival
+              Generate and store upto 10,000 phone numbers.
             </p>
-            <input name="phone" placeholder="Generate 1 to 10000" />
+            <input
+              type="number"
+              value={amount}
+              onChange={e => this.handleChange(e.target.value)}
+              name="phone"
+            />
             <button
               id="generate-numbers"
               onClick={() => this.generateNewPhoneNumber()}
+              disabled={disabledButton}
             >
               Generate
             </button>
           </div>
           <div className="App__right">
             <div className="download-pdf-file">
+              {/* <button onClick={this.generatePdf}>Download As Pdf</button> */}
               <button>Download As Pdf</button>
             </div>
             <div className="headers-for-phones">
@@ -73,80 +117,9 @@ class App extends React.Component {
                 <h3>Phone Number</h3>
               </div>
             </div>
-            <div className="phone-list-table">
-              <div className="phone-list-table__left">
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-              </div>
-              <div className="phone-list-table__right">
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-                <p>072509354</p>
-              </div>
-              {/* <table>
-                <thead>
-                  <tr>
-                    <td>Index</td>
-                    <td>Phone Numbers</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>{generatedPhoneNumber}</td>
-                  </tr>
-                </tbody>
-              </table> */}
+            <div className="contacts-table-list">
+              {phoneNumbers ? phoneNumbers : <div>No contacts. Please generate contacts.</div>}
             </div>
-
-            {/* <div className="Download-pdf-file">
-            <button>Download As PDF</button>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Index</th>
-                <th>Phone Number</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>{generatedPhoneNumber}</td>
-              </tr>
-            </tbody>
-          </table> */}
           </div>
         </div>
       </div>
