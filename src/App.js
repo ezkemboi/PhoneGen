@@ -26,17 +26,6 @@ class App extends React.Component {
     })
   }
 
-  // generatePdf = () => {
-  //   console.log('I am clicked')
-  //   const docItems = document.getElementsByName('contacts-table-list')
-  //   window.onbeforeprint = (event) => {
-  //     console.log('------>>>>>', event)
-  //     document.write(docItems);
-  //     document.close();
-  //   }
-  //   window.print()
-  // }
-
   // Generate new phone number function
   generateNewPhoneNumber = () => {
     // Generate 9 random numbers
@@ -132,13 +121,12 @@ class App extends React.Component {
             </button>
           </div>
           <div className="App__right">
-            <div className="download-pdf-file">
+            <div className="right-header-section">
+              <button className="clear-button" onClick={this.clearContacts}>Clear Contacts</button>
               <select className="order-contacts" onChange={e => this.orderContacts(e.target.value)}>
                 <option>Ascending</option>
                 <option>Descending</option>
               </select>
-              <button className="clear-button" onClick={this.clearContacts}>Clear Contacts</button>
-              <button id="download-button">Download As Pdf</button>
             </div>
             <div className="headers-for-phones">
               <div className="headers-for-phones__index">
