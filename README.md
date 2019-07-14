@@ -9,6 +9,8 @@ The numbers should be 10 but the first digit should be 0.
 All phone numbers should be unique. 
 No database to use, but store it in a file of 3 to 4 MB. 
 
+[Website Link](https://ezrqnkemboi.github.io/random_phone_number_generator/)
+
 # How to run
 
 - Clone `git clone https://github.com/me-x-mi/random_phone_number_generator.git`

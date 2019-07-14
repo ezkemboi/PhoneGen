@@ -91,6 +91,7 @@ class App extends React.Component {
               Generate and store upto 10,000 phone numbers.
             </p>
             <input
+              id="handle-change-input"
               type="number"
               value={amount}
               onChange={e => this.handleChange(e.target.value)}
