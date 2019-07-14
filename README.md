@@ -11,7 +11,7 @@ No database to use, but store it in a file of 3 to 4 MB.
 
 # Website 
 
-[Go To](https://practical-darwin-1a83b1.netlify.com/)
+https://practical-darwin-1a83b1.netlify.com/
 
 # How to run
 

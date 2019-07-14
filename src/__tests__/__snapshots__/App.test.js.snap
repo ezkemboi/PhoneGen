@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`APP renders without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`APP renders without crashing including Component Did Mount Call 1`] = `ShallowWrapper {}`;

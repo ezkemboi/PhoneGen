@@ -15,7 +15,7 @@ class App extends React.Component {
     const contacts = JSON.parse(localStorage.getItem("contacts"));
     if (contacts && contacts.length >= 1) {
       this.setState({
-        numbersGenerated: contacts
+        numbersGenerated: contacts.sort()
       });
     }
   }
@@ -43,16 +43,19 @@ class App extends React.Component {
     let number;
     const { numbersGenerated, amount } = this.state;
     for (let i = 0; i < amount; i++) {
-      number = `0${Math.floor(Math.random() * 1000000000)}`;
+      number = `0${Math.floor(Math.random() * 1000000000 + 1)}`;
       // Check already created numbers and its length (MAX = 10,000)
       if (!numbersGenerated.includes(number) && numbersGenerated.length <= 10000) {
         numbersGenerated.push(number);
       }
+      // Generate again
+      number = `0${Math.floor(Math.random() * 1000000000 + 1)}`;
     }
     // Add generated numbers to state and save local storage
     localStorage.setItem("contacts", JSON.stringify(numbersGenerated));
+    const sortedGeneratedContacts = numbersGenerated.sort()
     this.setState({
-      numbersGenerated
+      numbersGenerated: sortedGeneratedContacts
     });
   }
 
@@ -62,13 +65,30 @@ class App extends React.Component {
     window.location.reload();
   }
 
+  // Order contacts in ascending or descending order
+  orderContacts = (value) => {
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    if (contacts && contacts.length >= 1) {
+      if (value === 'Descending') {
+        this.setState({
+          numbersGenerated: contacts.sort().reverse()
+        });
+      }
+      else {
+        this.setState({
+          numbersGenerated: contacts.sort()
+        });
+      }
+    }
+  }
+
   render() {
     const { amount, numbersGenerated } = this.state;
     let phoneNumbers;
     let disabledButton;
     // Edge cases for catching when to disable button
     const itemsInLocalStorage = localStorage.getItem("contacts");
-    if (amount < 1 || amount >= 10000 || (itemsInLocalStorage && itemsInLocalStorage.length >= 10000)) {
+    if (amount < 1 || amount > 10000 || (itemsInLocalStorage && itemsInLocalStorage.length >= 10000)) {
       disabledButton = "disabled"
     }
     if (numbersGenerated && numbersGenerated.length >= 1) {
@@ -113,7 +133,10 @@ class App extends React.Component {
           </div>
           <div className="App__right">
             <div className="download-pdf-file">
-              {/* <button onClick={this.generatePdf}>Download As Pdf</button> */}
+              <select className="order-contacts" onChange={e => this.orderContacts(e.target.value)}>
+                <option>Ascending</option>
+                <option>Descending</option>
+              </select>
               <button className="clear-button" onClick={this.clearContacts}>Clear Contacts</button>
               <button id="download-button">Download As Pdf</button>
             </div>
